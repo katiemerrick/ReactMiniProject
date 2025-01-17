@@ -1,28 +1,15 @@
-import { useState } from "react";
+// Bringing in the required import from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
+import Nav from './components/NavTabs';
 
-// import { View, Text, Button, StyleSheet } from 'react';
-
-
-
-const dictionaryUrl = "https://1rnoszgn46.execute-api.us-east-1.amazonaws.com"; // URL for your API
-
-const App = () => {
+function App() {
+  // The Outlet component will conditionally swap between the different pages according to the URL
   return (
-    <div>
-    <DictionarySelector />
-    <RandomWord />
-    </div>
-  )
-};
+    <>
+      <Nav />
+      <Outlet />
+    </>
+  );
+}
 
 export default App;
-
-
-
-
-export const randomWordUrl = `${dictionaryUrl}/random-word`;
-export const wordsStartingWithUrl = `${dictionaryUrl}/words-start-with`;
-export const dictionariesUrl = `${dictionaryUrl}/multi-details`;
-export const searchUrl = `${dictionaryUrl}/search`;
-export const onlyWordsUrl = `${dictionaryUrl}/only-words`;
-export const multiChoiceUrl = `${dictionaryUrl}/multichoice`;
