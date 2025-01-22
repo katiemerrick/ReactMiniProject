@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import '../index.css';
 
 
 
@@ -7,7 +7,8 @@ import { useState } from "react";
 const dictionaryUrl = 'https://1rnoszgn46.execute-api.us-east-1.amazonaws.com' ;
 
 function RandomWord({tag}) {
-const [word, setWord] = useState(null);
+const [data, setData] = useState({word: '', definition: '', startsWith: ''});
+const {word, definition, startsWith} = data
   const fetchRandomWord = () => {
     fetch(`${dictionaryUrl}/random-word?tag=${tag}`)
       .then((response) => {
@@ -17,8 +18,7 @@ const [word, setWord] = useState(null);
         return response.json();
       })
       .then((data) => {
-        // Update this based on your API's response structure
-        setWord(data.word || "No word found");
+        setData(data);
       })
       .catch((error) => {
         console.error("Error fetching word:", error);
@@ -28,11 +28,12 @@ const [word, setWord] = useState(null);
 
   return (
     <div className="app">
-      <h1>Random Word Generator</h1>
+      <h1 className="text-3xl font-bold underline">Random Word Generator</h1>
       <div className="word-box">
-        <p>{word || "Click the button to generate a word!"}</p>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={fetchRandomWord}>Generate Word</button>
+      <p>{word || "Click the button to generate a word!"}</p>
+      <p>{definition}</p>
       </div>
-      <button onClick={fetchRandomWord}>Generate Word</button>
     </div>
   );
 
