@@ -4,12 +4,12 @@ import { useState } from "react";
 
 
 
+const dictionaryUrl = 'https://1rnoszgn46.execute-api.us-east-1.amazonaws.com' ;
 
-function RandomWord() {
+function RandomWord({tag}) {
 const [word, setWord] = useState(null);
-
   const fetchRandomWord = () => {
-    fetch(`${dictionaryUrl}/random-word?tag=biology`)
+    fetch(`${dictionaryUrl}/random-word?tag=${tag}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch word");
